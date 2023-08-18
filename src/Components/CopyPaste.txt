@@ -1,0 +1,32 @@
+// // // ListItems.py
+// // <td>{item.tag_id}</td>
+// // <td>{item.drop_off}</td>
+// // <td>{item.due_date}</td>
+// // <td>{item.type}</td>
+// // <td>{item.color}</td>
+// // <td>{item.is_shoe}</td>
+// // <td>{item.follow_up}</td>
+// // <td>{item.description}</td>
+// // <td>{item.transaction}</td>
+
+
+// // <th>Tag ID</th>
+// // <th>Drop Off Date</th>
+// // <th>Due Date</th>
+// // <th>Type</th>
+// // <th>Color</th>
+// // <th>Is Shoe</th>
+// // <th>Follow-Up</th>
+// // <th>Description</th>
+// // <th>Transaction</th>
+
+// // Items.py
+// tag: item.tag,
+// drop_off: item.drop_off,
+// due_date: item.due_date,
+// type: item.type,
+// color: item.color,
+// in_shoe: item.in_shoe,
+// follow_up: item.follow_up,
+// description: item.description,
+// transaction: item.transaction,
