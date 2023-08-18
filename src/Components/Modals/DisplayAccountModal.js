@@ -5,35 +5,12 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import AddAccountModal from "./AddAccountModal";
+import AddTransactionModal from "../Modals/AddTransactionModal";
 
 const DisplayAccountModal = (props) => {
   const [modalShow, setModalShow] = useState(false);
   const [updatedAccountData, setUpdatedAccountData] = useState({});
-  const [accountData, setAccountData] = useState([]);
-
-  const getAccounts = () => {
-    axios
-      .get(`${props.wemes_url}users/`)
-      .then((response) => {
-        const newData = response.data.map((account) => {
-          return {
-            id: account.id,
-            first_name: account.first_name,
-            last_name: account.last_name,
-            last_four: account.last_four,
-            phone_num: account.phone_num,
-            email: account.email,
-            admin: account.admin,
-            is_active: account.is_active,
-            transactions: account.transactions,
-          };
-        });
-        setAccountData(newData);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
+  const [lastFour, setLastFour] = useState(props.selectedaccount.last_four);
 
   const updateAccountData = async (index, accountData) => {
     axios
@@ -43,21 +20,32 @@ const DisplayAccountModal = (props) => {
     return accountData;
   };
 
-  const handleFormChange = (e) => {
-    const updated_key = e.target.name;
-    setUpdatedAccountData({
-      ...updatedAccountData,
-      [updated_key]: e.target.value, //computed property
-    });
+  const handleFormChange = (event) => {
+    const updated_key = event.target.name;
+    const updated_value = event.target.value;
+
+    if (updated_key === "phone_num") {
+      props.setUseLastFour(true);
+      const slicedLastFour = updated_value.slice(-4);
+      setLastFour(slicedLastFour);
+    }
+
+    setUpdatedAccountData((prevData) => ({
+      ...prevData,
+      [updated_key]: updated_value,
+    }));
   };
 
   const submitAccountData = (event) => {
     event.preventDefault();
     updateAccountData(props.selectedaccount.id, updatedAccountData);
-    getAccounts();
+    props.getAccounts();
   };
 
-  useEffect(() => getAccounts(), []);
+  useEffect(() => {
+    // Reset lastFour when the modal is shown
+    setLastFour(props.selectedaccount.last_four);
+  }, [props.selectedaccount.last_four]);
 
   return (
     <Modal
@@ -66,23 +54,28 @@ const DisplayAccountModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Edit {props.selectedaccount.first_name}'s Account{" "}
-        </Modal.Title>
-      </Modal.Header>
-      <Button
+      <div
+        className="modal-add-button"
         variant="warning"
         type="submit"
         onClick={() => setModalShow(true)}
       >
         Add Transaction
-      </Button>
-      <AddAccountModal
+      </div>
+      {/* <AddTransactionModal
         show={modalShow}
         onHide={() => setModalShow(false)}
         wemes_url={props.wemes_url}
-      />{" "}
+      /> */}
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Edit Account:{" "}
+          <b className="modal-title-text">
+            {props.selectedaccount.first_name} {props.selectedaccount.last_name}
+          </b>
+        </Modal.Title>
+      </Modal.Header>
+
       <Modal.Body>
         <Form size="lg" onSubmit={submitAccountData}>
           {/*  ********** First Name **********  */}
@@ -143,13 +136,17 @@ const DisplayAccountModal = (props) => {
 
           {/*  ********** Last Four **********  */}
           <Form.Group className="mb-3" controlId="formLastFour">
-            <Form.Label>Phone</Form.Label>
+            <Form.Label>Last Four</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedaccount.last_four}
               name="last_four"
+              disabled
+              value={
+                !props.useLastFour ? props.selectedaccount.last_four : lastFour
+              }
               onChange={handleFormChange}
             />
+
             <Form.Text className="text-muted">
               {props.selectedaccount.last_four}
             </Form.Text>
@@ -159,7 +156,10 @@ const DisplayAccountModal = (props) => {
             className="modal-button"
             variant="warning"
             type="submit"
-            onClick={props.onHide}
+            onClick={() => {
+              props.onHide();
+              props.getAccounts();
+            }}
           >
             Submit
           </Button>

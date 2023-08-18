@@ -40,3 +40,24 @@
 .modal-button {
   text-align: center;
 }
+
+.modal-title-text {
+  background-color: rgb(255,192,7);
+  padding: 10px;
+}
+
+.modal-add-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  background-color: rgb(255,192,7);
+  height: 40px;
+  margin-bottom: .5rem;
+}
+
+.modal-add-button:hover{
+  background-color: #FFCC33;
+}

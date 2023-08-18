@@ -18,7 +18,7 @@ const AddAccountModal = (props) => {
         first_name,
         last_name,
         phone_num,
-        last_four: phone_num.slice(6),
+        last_four: phone_num.slice(-4),
         email,
         transactions: [],
       })
