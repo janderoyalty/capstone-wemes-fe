@@ -50,7 +50,7 @@ function AddTransactionModal(props) {
     });
   };
 
-  useEffect(() => props.getTransactions(), []);
+  useEffect(() => props.getTransactions(), [props]);
 
   return (
     <Modal

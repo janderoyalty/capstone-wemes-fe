@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 // icons
 import { AiFillEdit } from "react-icons/ai";

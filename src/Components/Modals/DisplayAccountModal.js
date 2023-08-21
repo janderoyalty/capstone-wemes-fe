@@ -13,6 +13,8 @@ const DisplayAccountModal = (props) => {
   const [lastFour, setLastFour] = useState(props.selectedaccount.last_four);
 
   const updateAccountData = async (index, accountData) => {
+    console.log(props.selectedaccount);
+    console.log(lastFour);
     axios
       .patch(`${props.wemes_url}users/${index}/`, accountData)
       .then()
@@ -28,6 +30,11 @@ const DisplayAccountModal = (props) => {
       props.setUseLastFour(true);
       const slicedLastFour = updated_value.slice(-4);
       setLastFour(slicedLastFour);
+      setUpdatedAccountData((prevData) => ({
+        ...prevData,
+        [updated_key]: updated_value,
+        last_four: slicedLastFour,
+      }));
     }
 
     setUpdatedAccountData((prevData) => ({
