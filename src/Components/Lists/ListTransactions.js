@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 // icons
 import { AiFillEdit } from "react-icons/ai";
@@ -60,6 +60,10 @@ const ListTransactions = ({
       </tr>
     ));
   };
+
+  useEffect(() => {
+    getAccounts();
+  }, []);
 
   return (
     <>

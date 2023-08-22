@@ -68,6 +68,7 @@ const Transactions = ({
         getTransactions={() => getTransactions()}
         setTransactionData={setTransactionData}
         accountData={accountData}
+        getAccounts={() => getAccounts()}
       />
     </div>
   );
