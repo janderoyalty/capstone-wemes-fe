@@ -86,7 +86,7 @@ const NaviBar = () => {
                 wemes_url={wemes_url}
                 getAccounts={() => getAccounts()}
                 accountData={accountData}
-                setAccountData={() => setAccountData()}
+                setAccountData={setAccountData} // Pass the function directly
               />
             }
           />

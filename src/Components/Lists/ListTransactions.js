@@ -30,6 +30,14 @@ const ListTransactions = ({
     return sortByA < sortByB ? -1 * order : 1 * order;
   });
 
+  const mapCustomerIdToName = (accountId) => {
+    const account = accountData.find((account) => account.id === accountId);
+    if (account) {
+      return `${account.first_name} ${account.last_name.slice(0, 1)}.`;
+    }
+    return "Unknown Customer";
+  };
+
   const transactionInfo = () => {
     return sortedTransactions.map((transaction, index) => (
       <tr
@@ -44,8 +52,8 @@ const ListTransactions = ({
           <AiFillEdit />
         </td>
         <td>{transaction.id}</td>
-        <td>{transaction.customer}</td>
-        <td>{transaction.admin}</td>
+        <td>{mapCustomerIdToName(transaction.customer)}</td>
+        <td>{mapCustomerIdToName(transaction.admin)}</td>
         <td>{transaction.drop_off}</td>
         <td>{transaction.description}</td>
         <td>{transaction.items.length}</td>
@@ -63,7 +71,7 @@ const ListTransactions = ({
           index={clickedIndex}
           selectedtransaction={selectedtransaction}
           transactionData={transactionData}
-          getTransactions={getTransactions}
+          getTransactions={() => getTransactions()}
           setTransactionData={setTransactionData}
         />
         <SortMenuTransactions
