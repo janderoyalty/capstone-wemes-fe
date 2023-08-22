@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 // Bootstrap
 import Button from "react-bootstrap/Button";
@@ -49,8 +49,6 @@ function AddTransactionModal(props) {
       items: [],
     });
   };
-
-  useEffect(() => props.getTransactions(), [props]);
 
   return (
     <Modal

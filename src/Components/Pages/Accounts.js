@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 // icons
 import { FaUserPlus } from "react-icons/fa";
 // components
@@ -65,4 +66,7 @@ const Accounts = ({ wemes_url }) => {
   );
 };
 
+Accounts.propTypes = {
+  wemes_url: PropTypes.string.isRequired,
+};
 export default Accounts;

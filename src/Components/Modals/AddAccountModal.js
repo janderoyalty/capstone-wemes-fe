@@ -5,7 +5,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-const AddAccountModal = (props) => {
+// const AddAccountModal = ({ show, onHide, wemes_url, getAccounts, ...props }) => {
+const AddAccountModal = ({ show, onHide, wemes_url, getAccounts }) => {
   const addAccount = ({
     first_name,
     last_name,
@@ -14,7 +15,7 @@ const AddAccountModal = (props) => {
     transactions,
   }) => {
     axios
-      .post(`${props.wemes_url}users/`, {
+      .post(`${wemes_url}users/`, {
         first_name,
         last_name,
         phone_num,
@@ -40,7 +41,7 @@ const AddAccountModal = (props) => {
   const submitAccountData = (event) => {
     event.preventDefault();
     addAccount(accountData);
-    props.getAccounts();
+    getAccounts();
     setAccountData({
       first_name: "",
       last_name: "",
@@ -51,7 +52,7 @@ const AddAccountModal = (props) => {
 
   return (
     <Modal
-      {...props}
+      // {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -121,7 +122,7 @@ const AddAccountModal = (props) => {
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
 
-          <Button variant="warning" type="submit" onClick={props.onHide}>
+          <Button variant="warning" type="submit" onClick={onHide}>
             Submit
           </Button>
         </Form>
