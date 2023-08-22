@@ -7,33 +7,33 @@ import { FaUserPlus } from "react-icons/fa";
 import AddAccountModal from "../Modals/AddAccountModal";
 import ListAccounts from "../Lists/ListAccounts";
 
-const Accounts = ({ wemes_url }) => {
-  const [accountData, setAccountData] = useState([]);
+const Accounts = ({ wemes_url, getAccounts,accountData, setAccountData }) => {
   const [modalShow, setModalShow] = useState(false);
+  // const [accountData, setAccountData] = useState([]);
 
-  const getAccounts = () => {
-    axios
-      .get(`${wemes_url}users/`)
-      .then((response) => {
-        const newData = response.data.map((account) => {
-          return {
-            id: account.id,
-            first_name: account.first_name,
-            last_name: account.last_name,
-            last_four: account.last_four,
-            phone_num: account.phone_num,
-            email: account.email,
-            admin: account.admin,
-            is_active: account.is_active,
-            transactions: account.transactions,
-          };
-        });
-        setAccountData(newData);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
+  // const getAccounts = () => {
+  //   axios
+  //     .get(`${wemes_url}users/`)
+  //     .then((response) => {
+  //       const newData = response.data.map((account) => {
+  //         return {
+  //           id: account.id,
+  //           first_name: account.first_name,
+  //           last_name: account.last_name,
+  //           last_four: account.last_four,
+  //           phone_num: account.phone_num,
+  //           email: account.email,
+  //           admin: account.admin,
+  //           is_active: account.is_active,
+  //           transactions: account.transactions,
+  //         };
+  //       });
+  //       setAccountData(newData);
+  //     })
+  //     .catch((err) => {
+  //       alert(err);
+  //     });
+  // };
 
   useEffect(() => getAccounts(), []);
 
@@ -46,6 +46,7 @@ const Accounts = ({ wemes_url }) => {
     <div>
       <h1>Accounts</h1>
       <FaUserPlus
+        className="icon-pointer"
         title="add an account"
         size={50}
         onClick={() => {

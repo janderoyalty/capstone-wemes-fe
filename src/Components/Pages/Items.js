@@ -69,6 +69,7 @@ const Items = ({ wemes_url }) => {
     <div>
       <h1>Items</h1>
       <FaTags
+        className="icon-pointer"
         title="add an item"
         size={50}
         onClick={() => setModalShow(true)}

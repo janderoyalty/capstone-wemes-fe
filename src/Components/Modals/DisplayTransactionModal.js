@@ -10,30 +10,6 @@ import AddItemModal from "./AddItemModal";
 function DisplayTransactionModal(props) {
   const [modalShow, setModalShow] = useState(false);
   const [updatedTransactionData, setUpdatedTransactionData] = useState({});
-  const [transactionData, setTransactionData] = useState([]);
-
-  const getTransactions = () => {
-    axios
-      .get(`${props.wemes_url}transactions/`)
-      .then((response) => {
-        const newData = response.data.map((transaction) => {
-          return {
-            id: transaction.id,
-            drop_off: transaction.drop_off,
-            // admin: `${transaction.admin.first_name} ${transaction.admin.last_name}`,
-            // customer: `${transaction.customer.first_name} ${transaction.customer.last_name}`,
-            admin: transaction.admin,
-            customer: transaction.customer,
-            items: transaction.items,
-            description: transaction.description,
-          };
-        });
-        setTransactionData(newData);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  };
 
   const updateTransactionData = async (index, transactionData) => {
     axios
@@ -47,14 +23,14 @@ function DisplayTransactionModal(props) {
     const updated_key = e.target.name;
     setUpdatedTransactionData({
       ...updatedTransactionData,
-      [updated_key]: e.target.value, //computed property
+      [updated_key]: e.target.value,
     });
   };
 
   const submitTransactionData = (event) => {
     event.preventDefault();
     updateTransactionData(props.selectedtransaction.id, updatedTransactionData);
-    getTransactions();
+    props.getTransactions();
   };
 
   useEffect(() => props.getTransactions(), []);

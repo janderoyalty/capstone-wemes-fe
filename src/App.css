@@ -63,3 +63,7 @@
 .modal-add-button:hover{
   background-color: #FFCC33;
 }
+
+.icon-pointer{
+  cursor: pointer;
+}
