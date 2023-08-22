@@ -61,19 +61,6 @@ const DisplayAccountModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <div
-        className="modal-add-button"
-        variant="warning"
-        type="submit"
-        onClick={() => setModalShow(true)}
-      >
-        Add Transaction
-      </div>
-      {/* <AddTransactionModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        wemes_url={props.wemes_url}
-      /> */}
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Edit Account:{" "}
@@ -172,6 +159,21 @@ const DisplayAccountModal = (props) => {
           </Button>
         </Form>
       </Modal.Body>
+      <Modal.Footer>
+        <div
+          className="modal-add-button"
+          variant="warning"
+          type="submit"
+          onClick={() => setModalShow(true)}
+        >
+          Add Transaction
+        </div>
+        {/* <AddTransactionModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        wemes_url={props.wemes_url}
+      /> */}
+      </Modal.Footer>
     </Modal>
   );
 };
