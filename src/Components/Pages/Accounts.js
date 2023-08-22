@@ -7,7 +7,8 @@ import { FaUserPlus } from "react-icons/fa";
 import AddAccountModal from "../Modals/AddAccountModal";
 import ListAccounts from "../Lists/ListAccounts";
 
-const Accounts = ({ wemes_url, getAccounts,accountData, setAccountData }) => {
+const 
+Accounts = ({ wemes_url, getAccounts,accountData, setAccountData }) => {
   const [modalShow, setModalShow] = useState(false);
   // const [accountData, setAccountData] = useState([]);
 
@@ -58,12 +59,12 @@ const Accounts = ({ wemes_url, getAccounts,accountData, setAccountData }) => {
         show={modalShow}
         onHide={() => hideModal()}
         wemes_url={wemes_url}
-        getAccounts={getAccounts}
+        getAccounts={() => getAccounts()}
       />
       <ListAccounts
         wemes_url={wemes_url}
         accounts={accountData}
-        getAccounts={getAccounts}
+        getAccounts={() => getAccounts()}
       />
     </div>
   );

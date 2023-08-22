@@ -56,7 +56,7 @@ const ListAccounts = ({ accounts, wemes_url, getAccounts }) => {
           wemes_url={wemes_url}
           index={clickedIndex}
           selectedaccount={selectedaccount}
-          getAccounts={getAccounts}
+          getAccounts={() => getAccounts()}
           setUseLastFour={setUseLastFour}
           useLastFour={useLastFour}
         />
