@@ -21,7 +21,6 @@ const NaviBar = () => {
             <Navbar.Brand as={Link} to={"/"}>
               <img
                 src={require("../wemes_logo.png")}
-                // width="30"
                 height="40"
                 className="d-inline-block align-top"
                 alt="Wemes logo"

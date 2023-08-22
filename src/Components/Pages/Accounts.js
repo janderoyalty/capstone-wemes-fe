@@ -48,7 +48,9 @@ const Accounts = ({ wemes_url }) => {
       <FaUserPlus
         title="add an account"
         size={50}
-        onClick={() => setModalShow(true)}
+        onClick={() => {
+          setModalShow(true);
+        }}
       />
 
       <AddAccountModal
