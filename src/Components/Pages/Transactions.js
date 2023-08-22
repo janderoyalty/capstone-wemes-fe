@@ -7,7 +7,12 @@ import { FaUserTag } from "react-icons/fa";
 import AddTransactionModal from "../Modals/AddTransactionModal";
 import ListTransactions from "../Lists/ListTransactions";
 
-const Transactions = ({ wemes_url, getAccounts, accountData, setAccountData }) => {
+const Transactions = ({
+  wemes_url,
+  getAccounts,
+  accountData,
+  setAccountData,
+}) => {
   const [transactionData, setTransactionData] = useState([]);
   const [addTransactionModalShow, setAddTransactionModalShow] = useState(false);
 
@@ -55,14 +60,15 @@ const Transactions = ({ wemes_url, getAccounts, accountData, setAccountData }) =
         show={addTransactionModalShow}
         onHide={() => hideModal()}
         wemes_url={wemes_url}
-        getTransactions={getTransactions}
+        getTransactions={() => getTransactions()}
       />
       <ListTransactions
         wemes_url={wemes_url}
         transactionData={transactionData}
-        getTransactions={getTransactions}
+        getTransactions={() => getTransactions()}
         setTransactionData={setTransactionData}
         accountData={accountData}
+        getAccounts={() => getAccounts()}
       />
     </div>
   );

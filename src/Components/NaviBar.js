@@ -73,9 +73,9 @@ const NaviBar = () => {
             element={
               <Accounts
                 wemes_url={wemes_url}
-                getAccounts={getAccounts}
+                getAccounts={() => getAccounts()}
                 accountData={accountData}
-                setAccountData={setAccountData}
+                setAccountData={() => setAccountData()}
               />
             }
           />
@@ -84,7 +84,7 @@ const NaviBar = () => {
             element={
               <Transactions
                 wemes_url={wemes_url}
-                getAccounts={getAccounts}
+                getAccounts={() => getAccounts()}
                 accountData={accountData}
                 setAccountData={setAccountData}
               />
