@@ -45,6 +45,7 @@ const Transactions = ({ wemes_url }) => {
     <div>
       <h1>Transactions</h1>
       <FaUserTag
+        className="icon-pointer"
         title="add an account"
         size={50}
         variant="warning"

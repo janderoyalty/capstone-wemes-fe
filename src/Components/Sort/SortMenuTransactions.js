@@ -46,7 +46,7 @@ const SortBoardMenu = ({
           title="ascending"
           size={35}
           onClick={() => onOrderByChange("asc")}
-          className="board-menu-item"
+          className="board-menu-item icon-pointer"
         >
           ascending{" "}
           {orderBy === "asc" && <BiCheck id="board-menu--check-mark" />}
@@ -55,7 +55,7 @@ const SortBoardMenu = ({
           title="descending"
           size={35}
           onClick={() => onOrderByChange("desc")}
-          className="board-menu-item"
+          className="board-menu-item icon-pointer"
         >
           descending{" "}
           {orderBy === "desc" && <BiCheck id="board-menu--check-mark" />}

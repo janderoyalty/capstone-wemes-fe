@@ -46,6 +46,7 @@ const Accounts = ({ wemes_url }) => {
     <div>
       <h1>Accounts</h1>
       <FaUserPlus
+        className="icon-pointer"
         title="add an account"
         size={50}
         onClick={() => {
