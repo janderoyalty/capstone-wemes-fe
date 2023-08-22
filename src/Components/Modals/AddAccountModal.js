@@ -5,14 +5,12 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-// const AddAccountModal = ({ show, onHide, wemes_url, getAccounts, ...props }) => {
 const AddAccountModal = ({ show, onHide, wemes_url, getAccounts }) => {
   const addAccount = ({
     first_name,
     last_name,
     phone_num,
     email,
-    transactions,
   }) => {
     axios
       .post(`${wemes_url}users/`, {
@@ -52,7 +50,8 @@ const AddAccountModal = ({ show, onHide, wemes_url, getAccounts }) => {
 
   return (
     <Modal
-      // {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
