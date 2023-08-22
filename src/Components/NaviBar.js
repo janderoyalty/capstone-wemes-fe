@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import { Nav, Navbar, Container } from "react-bootstrap";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -12,6 +13,31 @@ import Items from "./Pages/Items";
 const NaviBar = () => {
   // const wemes_url = "https://wemes-be.herokuapp.com/";
   const wemes_url = "http://127.0.0.1:8000/";
+  const [accountData, setAccountData] = useState([]);
+
+  const getAccounts = () => {
+    axios
+      .get(`${wemes_url}users/`)
+      .then((response) => {
+        const newData = response.data.map((account) => {
+          return {
+            id: account.id,
+            first_name: account.first_name,
+            last_name: account.last_name,
+            last_four: account.last_four,
+            phone_num: account.phone_num,
+            email: account.email,
+            admin: account.admin,
+            is_active: account.is_active,
+            transactions: account.transactions,
+          };
+        });
+        setAccountData(newData);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
 
   return (
     <Router>
@@ -44,11 +70,25 @@ const NaviBar = () => {
           <Route path="/" element={<Home />} />
           <Route
             path="/accounts"
-            element={<Accounts wemes_url={wemes_url} />}
+            element={
+              <Accounts
+                wemes_url={wemes_url}
+                getAccounts={getAccounts}
+                accountData={accountData}
+                setAccountData={setAccountData}
+              />
+            }
           />
           <Route
             path="/transactions"
-            element={<Transactions wemes_url={wemes_url} />}
+            element={
+              <Transactions
+                wemes_url={wemes_url}
+                getAccounts={getAccounts}
+                accountData={accountData}
+                setAccountData={setAccountData}
+              />
+            }
           />
           <Route path="/items" element={<Items wemes_url={wemes_url} />} />
         </Routes>

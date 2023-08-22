@@ -8,7 +8,15 @@ import Table from "react-bootstrap/Table";
 import DisplayTransactionModal from "../Modals/DisplayTransactionModal";
 import SortMenuTransactions from "../Sort/SortMenuTransactions";
 
-const ListTransactions = ({ transactionData, wemes_url, getTransactions }) => {
+const ListTransactions = ({
+  transactionData,
+  wemes_url,
+  getTransactions,
+  setTransactionData,
+  getAccounts,
+  accountData,
+  setAccountData,
+}) => {
   const [modalShow, setModalShow] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(0);
   const [selectedtransaction, setSelectedTransaction] = useState({});
@@ -54,7 +62,9 @@ const ListTransactions = ({ transactionData, wemes_url, getTransactions }) => {
           wemes_url={wemes_url}
           index={clickedIndex}
           selectedtransaction={selectedtransaction}
+          transactionData={transactionData}
           getTransactions={getTransactions}
+          setTransactionData={setTransactionData}
         />
         <SortMenuTransactions
           sortBy={sortBy}

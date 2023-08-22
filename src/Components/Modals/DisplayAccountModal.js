@@ -13,8 +13,6 @@ const DisplayAccountModal = (props) => {
   const [lastFour, setLastFour] = useState(props.selectedaccount.last_four);
 
   const updateAccountData = async (index, accountData) => {
-    console.log(props.selectedaccount);
-    console.log(lastFour);
     axios
       .patch(`${props.wemes_url}users/${index}/`, accountData)
       .then()
