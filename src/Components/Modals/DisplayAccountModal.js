@@ -161,15 +161,16 @@ const DisplayAccountModal = (props) => {
         <div
           className="modal-add-button"
           variant="warning"
+          type="submit"
           onClick={() => setModalShow(true)}
         >
           Add Transaction
         </div>
-        <AddTransactionModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          wemes_url={props.wemes_url}
-        />
+        {/* <AddTransactionModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        wemes_url={props.wemes_url}
+      /> */}
       </Modal.Footer>
     </Modal>
   );

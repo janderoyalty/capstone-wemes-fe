@@ -16,8 +16,8 @@ function DisplayTransactionModal({
   transactionData,
   getTransactions,
   setTransactionData,
-  mapCustomerIdToName,
   accountData,
+  currentUser,
 }) {
   const [modalShow, setModalShow] = useState(false);
   const [updatedTransactionData, setUpdatedTransactionData] = useState({});
@@ -59,22 +59,9 @@ function DisplayTransactionModal({
           Edit Transaction #{selectedtransaction.id} from{" "}
           {selectedtransaction.drop_off}
           <br />
-          for Customer #{selectedtransaction.customer},{" "}
-          {mapCustomerIdToName(selectedtransaction.customer)}
+          for {currentUser}
         </Modal.Title>
       </Modal.Header>
-      <Button
-        variant="warning"
-        type="submit"
-        onClick={() => setModalShow(true)}
-      >
-        Add Item
-      </Button>
-      <AddItemModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        wemes_url={wemes_url}
-      />{" "}
       <Modal.Body>
         <Form size="lg" onSubmit={submitTransactionData}>
           {/*  ********** Drop Off Data*/}
@@ -145,6 +132,20 @@ function DisplayTransactionModal({
           Submit
         </Button>
       </Modal.Body>
+      <Modal.Footer>
+        <div
+          className="modal-add-button"
+          variant="warning"
+          onClick={() => setModalShow(true)}
+        >
+          Add Item
+        </div>
+        <AddItemModal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          wemes_url={wemes_url}
+        />
+      </Modal.Footer>
     </Modal>
   );
 }

@@ -22,6 +22,7 @@ const ListTransactions = ({
   const [selectedtransaction, setSelectedTransaction] = useState({});
   const [sortBy, setSortBy] = useState("id");
   const [orderBy, setOrderBy] = useState("desc");
+  const [currentUser, setCurrentUser] = useState("")
 
   const sortedTransactions = transactionData.sort((a, b) => {
     let order = orderBy === "asc" ? 1 : -1;
@@ -31,11 +32,11 @@ const ListTransactions = ({
   });
 
   const mapCustomerIdToName = (accountId) => {
-    console.log("mapCustomerIdToName");
-    console.log({
-      accountId,
-      accountData,
-    });
+    // console.log("mapCustomerIdToName");
+    // console.log({
+    //   accountId,
+    //   accountData,
+    // });
     const account = accountData.find((account) => account.id === accountId);
     if (account) {
       return `${account.first_name} ${account.last_name.slice(0, 1)}.`;
@@ -49,6 +50,7 @@ const ListTransactions = ({
         key={index}
         onClick={() => {
           setClickedIndex(index);
+          setCurrentUser(mapCustomerIdToName(transaction.customer))
           setModalShow(true);
           setSelectedTransaction(transaction);
         }}
@@ -82,8 +84,8 @@ const ListTransactions = ({
           transactionData={transactionData}
           getTransactions={() => getTransactions()}
           setTransactionData={() => setTransactionData()}
-          mapCustomerIdToName={() => mapCustomerIdToName()}
           accountData={accountData}
+          currentUser={currentUser}
         />
         <SortMenuTransactions
           sortBy={sortBy}

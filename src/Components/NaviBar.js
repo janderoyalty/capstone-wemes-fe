@@ -10,8 +10,8 @@ import Transactions from "./Pages/Transactions";
 import Items from "./Pages/Items";
 
 const NaviBar = () => {
-  const wemes_url = "https://wemes-be.onrender.com/";
-  // const wemes_url = "http://127.0.0.1:8000/";
+  // const wemes_url = "https://wemes-be.onrender.com/";
+  const wemes_url = "http://127.0.0.1:8000/";
   const [accountData, setAccountData] = useState([]);
 
   const getAccounts = () => {
