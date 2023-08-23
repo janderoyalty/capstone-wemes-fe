@@ -8,7 +8,6 @@ import Accounts from "./Pages/Accounts";
 import Home from "./Pages/Home";
 import Transactions from "./Pages/Transactions";
 import Items from "./Pages/Items";
-// import "../wemes_logo.png"
 
 const NaviBar = () => {
   const wemes_url = "https://wemes-be.onrender.com/";
