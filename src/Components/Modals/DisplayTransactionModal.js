@@ -7,13 +7,24 @@ import Form from "react-bootstrap/Form";
 // componets
 import AddItemModal from "./AddItemModal";
 
-function DisplayTransactionModal(props) {
+function DisplayTransactionModal({
+  wemes_url,
+  show,
+  onHide,
+  index,
+  selectedtransaction,
+  transactionData,
+  getTransactions,
+  setTransactionData,
+  mapCustomerIdToName,
+  accountData,
+}) {
   const [modalShow, setModalShow] = useState(false);
   const [updatedTransactionData, setUpdatedTransactionData] = useState({});
 
   const updateTransactionData = async (index, transactionData) => {
     axios
-      .patch(`${props.wemes_url}transactions/${index}`, transactionData)
+      .patch(`${wemes_url}transactions/${index}`, transactionData)
       .then()
       .catch((error) => console.log(error));
     return transactionData;
@@ -29,24 +40,27 @@ function DisplayTransactionModal(props) {
 
   const submitTransactionData = (event) => {
     event.preventDefault();
-    updateTransactionData(props.selectedtransaction.id, updatedTransactionData);
-    props.getTransactions();
+    updateTransactionData(selectedtransaction.id, updatedTransactionData);
+    getTransactions();
   };
 
-  useEffect(() => props.getTransactions(), []);
+  useEffect(() => getTransactions(), []);
 
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Edit {props.selectedtransaction.customer}'s
+          Edit Transaction #{selectedtransaction.id} from{" "}
+          {selectedtransaction.drop_off}
           <br />
-          Transaction on {props.selectedtransaction.drop_off}
+          for Customer #{selectedtransaction.customer},{" "}
+          {mapCustomerIdToName(selectedtransaction.customer)}
         </Modal.Title>
       </Modal.Header>
       <Button
@@ -59,7 +73,7 @@ function DisplayTransactionModal(props) {
       <AddItemModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-        wemes_url={props.wemes_url}
+        wemes_url={wemes_url}
       />{" "}
       <Modal.Body>
         <Form size="lg" onSubmit={submitTransactionData}>
@@ -68,12 +82,12 @@ function DisplayTransactionModal(props) {
             <Form.Label>Drop Off Date</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedtransaction.drop_off}
+              defaultValue={selectedtransaction.drop_off}
               name="drop_off"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedtransaction.drop_off}
+              {selectedtransaction.drop_off}
             </Form.Text>
           </Form.Group>
 
@@ -82,12 +96,12 @@ function DisplayTransactionModal(props) {
             <Form.Label>Cusotmer</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedtransaction.customer}
+              defaultValue={selectedtransaction.customer}
               name="customer.first_name"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedtransaction.customer}
+              {selectedtransaction.customer}
             </Form.Text>
           </Form.Group> */}
 
@@ -96,12 +110,12 @@ function DisplayTransactionModal(props) {
             <Form.Label>Admin</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedtransaction.admin}
+              defaultValue={selectedtransaction.admin}
               name="admin.first_name"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedtransaction.admin}
+              {selectedtransaction.admin}
             </Form.Text>
           </Form.Group> */}
 
@@ -112,12 +126,12 @@ function DisplayTransactionModal(props) {
             <Form.Label>Message</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedtransaction.description}
+              defaultValue={selectedtransaction.description}
               name="description"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedtransaction.description}
+              {selectedtransaction.description}
             </Form.Text>
           </Form.Group>
         </Form>
@@ -126,7 +140,7 @@ function DisplayTransactionModal(props) {
           className="modal-button"
           variant="warning"
           type="submit"
-          onClick={props.onHide}
+          onClick={onHide}
         >
           Submit
         </Button>

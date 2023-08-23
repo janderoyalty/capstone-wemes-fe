@@ -31,6 +31,11 @@ const ListTransactions = ({
   });
 
   const mapCustomerIdToName = (accountId) => {
+    console.log("mapCustomerIdToName");
+    console.log({
+      accountId,
+      accountData,
+    });
     const account = accountData.find((account) => account.id === accountId);
     if (account) {
       return `${account.first_name} ${account.last_name.slice(0, 1)}.`;
@@ -69,14 +74,16 @@ const ListTransactions = ({
     <>
       <div>
         <DisplayTransactionModal
+          wemes_url={wemes_url}
           show={modalShow}
           onHide={() => setModalShow(false)}
-          wemes_url={wemes_url}
           index={clickedIndex}
           selectedtransaction={selectedtransaction}
           transactionData={transactionData}
           getTransactions={() => getTransactions()}
-          setTransactionData={setTransactionData}
+          setTransactionData={() => setTransactionData()}
+          mapCustomerIdToName={() => mapCustomerIdToName()}
+          accountData={accountData}
         />
         <SortMenuTransactions
           sortBy={sortBy}

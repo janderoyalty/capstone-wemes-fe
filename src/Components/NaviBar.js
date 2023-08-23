@@ -11,8 +11,8 @@ import Items from "./Pages/Items";
 // import "../wemes_logo.png"
 
 const NaviBar = () => {
-  // const wemes_url = "https://wemes-be.herokuapp.com/";
-  const wemes_url = "http://127.0.0.1:8000/";
+  const wemes_url = "https://wemes-be.onrender.com/";
+  // const wemes_url = "http://127.0.0.1:8000/";
   const [accountData, setAccountData] = useState([]);
 
   const getAccounts = () => {
