@@ -24,6 +24,7 @@ const ListAccounts = ({
   const [useLastFour, setUseLastFour] = useState(false);
 
   const sortedAccounts = accounts.sort((a, b) => {
+    // console.log(accounts);
     let order = orderBy === "asc" ? 1 : -1;
     let sortByA = sortBy === "id" ? a[sortBy] : a[sortBy];
     let sortByB = sortBy === "id" ? b[sortBy] : b[sortBy];
@@ -69,6 +70,7 @@ const ListAccounts = ({
           setAddTransactionModalShow={() => setAddTransactionModalShow(true)}
         />
         <AddTransactionModal
+          accountsData={accounts}
           addTransactionModalShow={addTransactionModalShow}
           addTransactionModalOnHide={() => setAddTransactionModalShow(false)}
         />
