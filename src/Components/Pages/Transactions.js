@@ -60,6 +60,7 @@ const Transactions = ({
 
       <AddTransactionModal
         // show={addTransactionModalShow}
+        accountsData={accountData}
         wemes_url={wemes_url}
         getTransactions={() => getTransactions()}
         addTransactionModalShow={addTransactionModalShow}
