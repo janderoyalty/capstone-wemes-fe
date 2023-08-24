@@ -10,7 +10,7 @@ import Transactions from "./Pages/Transactions";
 import Items from "./Pages/Items";
 
 const NaviBar = () => {
-  let wemes_url = "";
+  let wemes_url = null;
   const DEPLOY = true;
 
   if (DEPLOY) {
