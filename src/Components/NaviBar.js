@@ -10,9 +10,16 @@ import Transactions from "./Pages/Transactions";
 import Items from "./Pages/Items";
 
 const NaviBar = () => {
-  // const wemes_url = "https://wemes-be.onrender.com/";
-  const wemes_url = "http://127.0.0.1:8000/";
   const [accountData, setAccountData] = useState([]);
+
+  let wemes_url = "";
+  const DEPLOY = true;
+
+  if (DEPLOY) {
+    wemes_url = process.env.REACT_APP_WEMES_URL;
+  } else {
+    wemes_url = process.env.REACT_APP_WEMES_URL_L;
+  }
 
   const getAccounts = () => {
     axios
