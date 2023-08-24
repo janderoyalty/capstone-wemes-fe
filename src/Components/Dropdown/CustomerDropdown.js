@@ -3,6 +3,7 @@ import Select from "react-select";
 
 const CustomerDropdown = ({ data, isAdmin, onSelect, person }) => {
   const [searchTerm, setSearchTerm] = useState("");
+
   const filteredData = data.filter(
     (item) =>
       item.admin === isAdmin &&
