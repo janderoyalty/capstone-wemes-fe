@@ -10,8 +10,6 @@ import Transactions from "./Pages/Transactions";
 import Items from "./Pages/Items";
 
 const NaviBar = () => {
-  const [accountData, setAccountData] = useState([]);
-
   let wemes_url = "";
   const DEPLOY = true;
 
@@ -20,6 +18,8 @@ const NaviBar = () => {
   } else {
     wemes_url = process.env.REACT_APP_WEMES_URL_L;
   }
+
+  const [accountData, setAccountData] = useState([]);
 
   const getAccounts = () => {
     axios
