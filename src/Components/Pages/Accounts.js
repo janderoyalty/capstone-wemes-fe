@@ -6,7 +6,14 @@ import { FaUserPlus } from "react-icons/fa";
 import AddAccountModal from "../Modals/AddAccountModal";
 import ListAccounts from "../Lists/ListAccounts";
 
-const Accounts = ({ wemes_url, getAccounts, accountData, setAccountData }) => {
+const Accounts = ({
+  wemes_url,
+  getAccounts,
+  accountData,
+  setAccountData,
+  setAddTransactionModalShow,
+  addTransactionModalShow,
+}) => {
   const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => getAccounts(), []);
@@ -38,6 +45,8 @@ const Accounts = ({ wemes_url, getAccounts, accountData, setAccountData }) => {
         wemes_url={wemes_url}
         accounts={accountData}
         getAccounts={() => getAccounts()}
+        setAddTransactionModalShow={setAddTransactionModalShow}
+        addTransactionModalShow={addTransactionModalShow}
       />
     </div>
   );

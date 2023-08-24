@@ -10,9 +10,7 @@ import Transactions from "./Pages/Transactions";
 import Items from "./Pages/Items";
 
 const NaviBar = () => {
-  const [accountData, setAccountData] = useState([]);
-
-  let wemes_url = "";
+  let wemes_url = null;
   const DEPLOY = true;
 
   if (DEPLOY) {
@@ -20,6 +18,9 @@ const NaviBar = () => {
   } else {
     wemes_url = process.env.REACT_APP_WEMES_URL_L;
   }
+
+  const [accountData, setAccountData] = useState([]);
+  const [addTransactionModalShow, setAddTransactionModalShow] = useState(false);
 
   const getAccounts = () => {
     axios
@@ -82,6 +83,8 @@ const NaviBar = () => {
                 getAccounts={() => getAccounts()}
                 accountData={accountData}
                 setAccountData={() => setAccountData()}
+                setAddTransactionModalShow={setAddTransactionModalShow}
+                addTransactionModalShow={addTransactionModalShow}
               />
             }
           />
@@ -93,6 +96,8 @@ const NaviBar = () => {
                 getAccounts={() => getAccounts()}
                 accountData={accountData}
                 setAccountData={setAccountData}
+                setAddTransactionModalShow={setAddTransactionModalShow}
+                addTransactionModalShow={addTransactionModalShow}
               />
             }
           />

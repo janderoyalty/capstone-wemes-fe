@@ -5,7 +5,12 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-function AddTransactionModal(props) {
+function AddTransactionModal({
+  wemes_url,
+  getTransactions,
+  addTransactionModalShow,
+  addTransactionModalOnHide,
+}) {
   const addTransaction = ({
     drop_off,
     admin,
@@ -14,7 +19,7 @@ function AddTransactionModal(props) {
     items,
   }) => {
     axios
-      .post(`${props.wemes_url}transactions/`, {
+      .post(`${wemes_url}transactions/`, {
         drop_off: drop_off,
         admin: admin,
         customer: customer,
@@ -38,7 +43,7 @@ function AddTransactionModal(props) {
   });
 
   const submitTransactionData = (event) => {
-    props.getTransactions();
+    getTransactions();
     event.preventDefault();
     addTransaction(transactionData);
     setTransactionData({
@@ -52,7 +57,8 @@ function AddTransactionModal(props) {
 
   return (
     <Modal
-      {...props}
+      show={addTransactionModalShow}
+      onHide={addTransactionModalOnHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -139,7 +145,7 @@ function AddTransactionModal(props) {
             <Form.Check type="checkbox" value="false" label="Check me out" />
           </Form.Group> */}
 
-          <Button variant="warning" type="submit" onClick={props.onHide}>
+          <Button variant="warning" type="submit" onClick={addTransactionModalOnHide}>
             Submit
           </Button>
         </Form>

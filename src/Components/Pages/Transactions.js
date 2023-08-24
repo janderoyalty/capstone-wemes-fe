@@ -12,9 +12,11 @@ const Transactions = ({
   getAccounts,
   accountData,
   setAccountData,
+  setAddTransactionModalShow,
+  addTransactionModalShow,
 }) => {
   const [transactionData, setTransactionData] = useState([]);
-  const [addTransactionModalShow, setAddTransactionModalShow] = useState(false);
+  // const [addTransactionModalShow, setAddTransactionModalShow] = useState(false);
 
   const getTransactions = () => {
     axios
@@ -57,10 +59,11 @@ const Transactions = ({
       />
 
       <AddTransactionModal
-        show={addTransactionModalShow}
-        onHide={() => hideModal()}
+        // show={addTransactionModalShow}
         wemes_url={wemes_url}
         getTransactions={() => getTransactions()}
+        addTransactionModalShow={addTransactionModalShow}
+        addTransactionModalOnHide={() => hideModal()}
       />
       <ListTransactions
         wemes_url={wemes_url}

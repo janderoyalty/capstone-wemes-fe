@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // Bootstrap
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-import AddAccountModal from "./AddAccountModal";
-import AddTransactionModal from "../Modals/AddTransactionModal";
+import { Button, Modal, Form } from "react-bootstrap";
 
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const DisplayAccountModal = (props) => {
-  const [modalShow, setModalShow] = useState(false);
+const DisplayAccountModal = ({
+  wemes_url,
+  index,
+  selectedaccount,
+  getAccounts,
+  setUseLastFour,
+  useLastFour,
+  displayAccountModalShow,
+  displayAccountModalOnHide,
+  setAddTransactionModalShow,
+  addTransactionModalShow,
+}) => {
+  const [modalDisplayShow, setModalDisplayShow] = useState(false);
   const [updatedAccountData, setUpdatedAccountData] = useState({});
-  const [lastFour, setLastFour] = useState(props.selectedaccount.last_four);
+  const [lastFour, setLastFour] = useState(selectedaccount.last_four);
+  const navigate = useNavigate();
 
   const updateAccountData = async (index, accountData) => {
     axios
-      .patch(`${props.wemes_url}users/${index}/`, accountData)
+      .patch(`${wemes_url}users/${index}/`, accountData)
       .then()
       .catch((error) => console.log(error));
     return accountData;
@@ -27,7 +36,7 @@ const DisplayAccountModal = (props) => {
     const updated_value = event.target.value;
 
     if (updated_key === "phone_num") {
-      props.setUseLastFour(true);
+      setUseLastFour(true);
       const slicedLastFour = updated_value.slice(-4);
       setLastFour(slicedLastFour);
       setUpdatedAccountData((prevData) => ({
@@ -45,18 +54,19 @@ const DisplayAccountModal = (props) => {
 
   const submitAccountData = (event) => {
     event.preventDefault();
-    updateAccountData(props.selectedaccount.id, updatedAccountData);
-    props.getAccounts();
+    updateAccountData(selectedaccount.id, updatedAccountData);
+    getAccounts();
   };
 
   useEffect(() => {
     // Reset lastFour when the modal is shown
-    setLastFour(props.selectedaccount.last_four);
-  }, [props.selectedaccount.last_four]);
+    setLastFour(selectedaccount.last_four);
+  }, [selectedaccount.last_four]);
 
   return (
     <Modal
-      {...props}
+      show={displayAccountModalShow}
+      onHide={displayAccountModalOnHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -65,7 +75,7 @@ const DisplayAccountModal = (props) => {
         <Modal.Title id="contained-modal-title-vcenter">
           Edit Account:{" "}
           <b className="modal-title-text">
-            {props.selectedaccount.first_name} {props.selectedaccount.last_name}
+            {selectedaccount.first_name} {selectedaccount.last_name}
           </b>
         </Modal.Title>
       </Modal.Header>
@@ -77,12 +87,12 @@ const DisplayAccountModal = (props) => {
             <Form.Label>First Name</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedaccount.first_name}
+              defaultValue={selectedaccount.first_name}
               name="first_name"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedaccount.first_name}
+              {selectedaccount.first_name}
             </Form.Text>
           </Form.Group>
 
@@ -91,12 +101,12 @@ const DisplayAccountModal = (props) => {
             <Form.Label>Last Name</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedaccount.last_name}
+              defaultValue={selectedaccount.last_name}
               name="last_name"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedaccount.last_name}
+              {selectedaccount.last_name}
             </Form.Text>
           </Form.Group>
 
@@ -105,12 +115,12 @@ const DisplayAccountModal = (props) => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedaccount.email}
+              defaultValue={selectedaccount.email}
               name="email"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedaccount.email}
+              {selectedaccount.email}
             </Form.Text>
           </Form.Group>
 
@@ -119,12 +129,12 @@ const DisplayAccountModal = (props) => {
             <Form.Label>Phone</Form.Label>
             <Form.Control
               type="name"
-              defaultValue={props.selectedaccount.phone_num}
+              defaultValue={selectedaccount.phone_num}
               name="phone_num"
               onChange={handleFormChange}
             />
             <Form.Text className="text-muted">
-              {props.selectedaccount.phone_num}
+              {selectedaccount.phone_num}
             </Form.Text>
           </Form.Group>
 
@@ -135,14 +145,12 @@ const DisplayAccountModal = (props) => {
               type="name"
               name="last_four"
               disabled
-              value={
-                !props.useLastFour ? props.selectedaccount.last_four : lastFour
-              }
+              value={!useLastFour ? selectedaccount.last_four : lastFour}
               onChange={handleFormChange}
             />
 
             <Form.Text className="text-muted">
-              {props.selectedaccount.last_four}
+              {selectedaccount.last_four}
             </Form.Text>
           </Form.Group>
 
@@ -151,8 +159,8 @@ const DisplayAccountModal = (props) => {
             variant="warning"
             type="submit"
             onClick={() => {
-              props.onHide();
-              props.getAccounts();
+              displayAccountModalOnHide();
+              getAccounts();
             }}
           >
             Submit
@@ -164,14 +172,18 @@ const DisplayAccountModal = (props) => {
           className="modal-add-button"
           variant="warning"
           type="submit"
-          onClick={() => setModalShow(true)}
+          onClick={() => {
+            displayAccountModalOnHide();
+            setAddTransactionModalShow();
+            navigate("/transactions"); // Navigate to "/transactions" endpoint
+          }}
         >
           Add Transaction
         </div>
         {/* <AddTransactionModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-        wemes_url={props.wemes_url}
+        show={modalDisplayShow}
+        onHide={() => setModalDisplayShow(false)}
+        wemes_url={wemes_url}
       /> */}
       </Modal.Footer>
     </Modal>
