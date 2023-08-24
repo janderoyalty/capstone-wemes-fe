@@ -1,22 +1,28 @@
-import React from "react";
-import Dropdown from "react-bootstrap/Dropdown";
+import React, { useState } from "react";
+import Select from "react-select";
 
 const CustomerDropdown = ({ data, isAdmin, onSelect, person }) => {
-  const filteredData = data.filter((item) => item.admin === isAdmin);
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredData = data.filter(
+    (item) =>
+      item.admin === isAdmin &&
+      (item.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.last_name.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
+  const options = filteredData.map((item) => ({
+    value: item.id,
+    label: `${item.first_name} ${item.last_name}`,
+  }));
 
   return (
-    <Dropdown onChange={(event) => onSelect(event.target.value)}>
-      <Dropdown.Toggle variant="secondary" value="">
-        Select {person}
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        {filteredData.map((item) => (
-          <Dropdown.Item key={item.id} value={item.id}>
-            {item.first_name} {item.last_name}
-          </Dropdown.Item>
-        ))}
-      </Dropdown.Menu>
-    </Dropdown>
+    <Select
+      options={options}
+      placeholder={`Select ${person}`}
+      onChange={(selectedOption) => onSelect(selectedOption.value)}
+      onInputChange={(inputValue) => setSearchTerm(inputValue)}
+      inputValue={searchTerm}
+    />
   );
 };
 
