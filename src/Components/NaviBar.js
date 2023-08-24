@@ -20,6 +20,7 @@ const NaviBar = () => {
   }
 
   const [accountData, setAccountData] = useState([]);
+  const [addTransactionModalShow, setAddTransactionModalShow] = useState(false);
 
   const getAccounts = () => {
     axios
@@ -82,6 +83,8 @@ const NaviBar = () => {
                 getAccounts={() => getAccounts()}
                 accountData={accountData}
                 setAccountData={() => setAccountData()}
+                setAddTransactionModalShow={setAddTransactionModalShow}
+                addTransactionModalShow={addTransactionModalShow}
               />
             }
           />
@@ -93,6 +96,8 @@ const NaviBar = () => {
                 getAccounts={() => getAccounts()}
                 accountData={accountData}
                 setAccountData={setAccountData}
+                setAddTransactionModalShow={setAddTransactionModalShow}
+                addTransactionModalShow={addTransactionModalShow}
               />
             }
           />

@@ -16,13 +16,15 @@ const ListTransactions = ({
   getAccounts,
   accountData,
   setAccountData,
+  setAddTransactionModalShow,
+  addTransactionModalShow,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(0);
   const [selectedtransaction, setSelectedTransaction] = useState({});
   const [sortBy, setSortBy] = useState("id");
   const [orderBy, setOrderBy] = useState("desc");
-  const [currentUser, setCurrentUser] = useState("")
+  const [currentUser, setCurrentUser] = useState("");
 
   const sortedTransactions = transactionData.sort((a, b) => {
     let order = orderBy === "asc" ? 1 : -1;
@@ -50,7 +52,7 @@ const ListTransactions = ({
         key={index}
         onClick={() => {
           setClickedIndex(index);
-          setCurrentUser(mapCustomerIdToName(transaction.customer))
+          setCurrentUser(mapCustomerIdToName(transaction.customer));
           setModalShow(true);
           setSelectedTransaction(transaction);
         }}

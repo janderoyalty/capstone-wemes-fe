@@ -7,9 +7,16 @@ import { AiFillEdit } from "react-icons/ai";
 // components
 import DisplayAccountModal from "../Modals/DisplayAccountModal";
 import SortMenuAccounts from "../Sort/SortMenuAccounts";
+import AddTransactionModal from "../Modals/AddTransactionModal";
 
-const ListAccounts = ({ accounts, wemes_url, getAccounts }) => {
-  const [modalShow, setModalShow] = useState(false);
+const ListAccounts = ({
+  accounts,
+  wemes_url,
+  getAccounts,
+  setAddTransactionModalShow,
+  addTransactionModalShow,
+}) => {
+  const [displayAccountModalShow, setDisplayModalShow] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(0);
   const [selectedaccount, setSelectedAccount] = useState({});
   const [sortBy, setSortBy] = useState("id");
@@ -29,7 +36,7 @@ const ListAccounts = ({ accounts, wemes_url, getAccounts }) => {
         key={index}
         onClick={() => {
           setClickedIndex(index);
-          setModalShow(true);
+          setDisplayModalShow(true);
           setSelectedAccount(account);
           setUseLastFour(false);
         }}
@@ -51,14 +58,19 @@ const ListAccounts = ({ accounts, wemes_url, getAccounts }) => {
     <>
       <div>
         <DisplayAccountModal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
           wemes_url={wemes_url}
           index={clickedIndex}
           selectedaccount={selectedaccount}
           getAccounts={() => getAccounts()}
           setUseLastFour={setUseLastFour}
           useLastFour={useLastFour}
+          displayAccountModalShow={displayAccountModalShow}
+          displayAccountModalOnHide={() => setDisplayModalShow(false)}
+          setAddTransactionModalShow={() => setAddTransactionModalShow(true)}
+        />
+        <AddTransactionModal
+          addTransactionModalShow={addTransactionModalShow}
+          addTransactionModalOnHide={() => setAddTransactionModalShow(false)}
         />
         <SortMenuAccounts
           sortBy={sortBy}
