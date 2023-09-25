@@ -40,6 +40,8 @@ const Accounts = ({
         onHide={() => hideModal()}
         wemes_url={wemes_url}
         getAccounts={() => getAccounts()}
+        accounts={accountData}
+        setAccountData={() => setAccountData()}
       />
       <ListAccounts
         wemes_url={wemes_url}

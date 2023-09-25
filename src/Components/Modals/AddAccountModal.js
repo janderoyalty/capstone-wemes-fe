@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 // Bootstrap
 import Button from "react-bootstrap/Button";
@@ -6,12 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 const AddAccountModal = ({ show, onHide, wemes_url, getAccounts }) => {
-  const addAccount = ({
-    first_name,
-    last_name,
-    phone_num,
-    email,
-  }) => {
+  const addAccount = ({ first_name, last_name, phone_num, email }) => {
     axios
       .post(`${wemes_url}users/`, {
         first_name,
@@ -22,7 +17,7 @@ const AddAccountModal = ({ show, onHide, wemes_url, getAccounts }) => {
         transactions: [],
       })
       .then((response) => {
-        // console.log(response);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -35,6 +30,8 @@ const AddAccountModal = ({ show, onHide, wemes_url, getAccounts }) => {
     phone_num: "",
     email: "",
   });
+
+  useEffect(() => getAccounts(), [accountData]);
 
   const submitAccountData = (event) => {
     event.preventDefault();

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 // Bootstrap
 import { Button, Modal, Form } from "react-bootstrap";
 
-import CustomerDropdown from "../Dropdown/CustomerDropdown";
+import CustomersDropdown from "../Dropdown/CustomersDropdown";
 
 const AddTransactionModal = ({
   wemes_url,
@@ -45,7 +45,6 @@ const AddTransactionModal = ({
   const [selectedCustomerId, setSelectedCustomerId] = useState("");
   const [selectedAdminId, setSelectedAdminId] = useState("");
 
-  
   const submitTransactionData = (event) => {
     getTransactions();
     event.preventDefault();
@@ -97,7 +96,7 @@ const AddTransactionModal = ({
           {/*  ********** Admin's Name **********  */}
           <Form.Group className="mb-3" controlId="formAdmin">
             <Form.Label>Admin</Form.Label>{" "}
-            <CustomerDropdown
+            <CustomersDropdown
               data={accountsData}
               isAdmin={true}
               person={"an admin"}
@@ -112,7 +111,7 @@ const AddTransactionModal = ({
           {/*  ********** Customer's Name **********  */}
           <Form.Group className="mb-3" controlId="formCustomer">
             <Form.Label>Customer</Form.Label>{" "}
-            <CustomerDropdown
+            <CustomersDropdown
               data={accountsData}
               isAdmin={false}
               person={"a customer"}
